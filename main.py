@@ -37,9 +37,12 @@ def get_router_list():
     return routers
 
 
-if __name__ == '__main__':
+def fetch_router_info():
     routers = get_router_list()
-    print(routers)
-    raw = get_router_data_raw('Belkin')
-    for pair in get_usr_password_combo(raw):
-        print(pair[0], pair[1])
+    info = {}
+
+    for router in routers:
+        raw = get_router_data_raw(router)
+        info[router] = get_usr_password_combo(raw)
+
+    return info
